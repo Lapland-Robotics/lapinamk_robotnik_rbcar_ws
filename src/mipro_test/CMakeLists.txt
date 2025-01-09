@@ -12,7 +12,13 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   genmsg
+  sensor_msgs
+  cv_bridge
+  image_transport
 )
+
+
+find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -106,7 +112,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES mipro_test
-CATKIN_DEPENDS roscpp rospy
+CATKIN_DEPENDS roscpp rospy sensor_msgs cv_bridge image_transport
 #  DEPENDS system_lib
 )
 
@@ -118,7 +124,8 @@ CATKIN_DEPENDS roscpp rospy
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${catkin_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS} 
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -149,6 +156,7 @@ add_dependencies(bandwith_test_node ${bandwith_test_node_EXPORTED_TARGETS} ${cat
 ## Specify libraries to link a library or executable target against
 target_link_libraries(bandwith_test_node
   ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
 )
 
 #############
