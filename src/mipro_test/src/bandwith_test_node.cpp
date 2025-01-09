@@ -15,7 +15,7 @@ int main(int argc, char **argv){
   ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 1000);
 
   // Set loop rate (publishing frequency)
-  ros::Rate loop_rate(20); // 20 Hz
+  ros::Rate loop_rate(4); // 4 Hz => 4.1 x 8 x 4 => 131,2 Mbps
 
   // Load the image using OpenCV (replace with your image file path)
   std::string image_path = "src/mipro_test/resources/test_image.jpg";
