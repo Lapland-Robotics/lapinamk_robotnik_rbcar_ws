@@ -12,10 +12,10 @@ int main(int argc, char **argv){
   ros::NodeHandle nh;
 
   // Create a publisher for sensor_msgs/Image
-  ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 1000);
+  ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 10);
 
   // Set loop rate (publishing frequency)
-  ros::Rate loop_rate(4); // 4 Hz => 4.1 x 8 x 4 => 131,2 Mbps
+  ros::Rate loop_rate(10); // 4 Hz => 0,5 x 8 x 10 => 40 Mbps
 
   // Load the image using OpenCV (replace with your image file path)
   std::string image_path = "src/mipro_test/resources/test_image.jpg";
@@ -29,13 +29,13 @@ int main(int argc, char **argv){
   // Convert the OpenCV image to a ROS Image message
   cv_bridge::CvImage cv_bridge_image;
   cv_bridge_image.header = std_msgs::Header();                   // Add header
-  cv_bridge_image.header.stamp = ros::Time::now();               // Timestamp
-  cv_bridge_image.header.frame_id = "camera";                    // Set the frame id (e.g., "camera")
+  cv_bridge_image.header.frame_id = "test_image";                    // Set the frame id (e.g., "camera")
   cv_bridge_image.encoding = sensor_msgs::image_encodings::BGR8; // Encoding type for color image
   cv_bridge_image.image = cv_image;
 
   // Main loop to publish image
   while (ros::ok()){
+    cv_bridge_image.header.stamp = ros::Time::now();
     image_pub.publish(cv_bridge_image.toImageMsg()); // Publish the image as a ROS message
     ros::spinOnce();
     loop_rate.sleep();
