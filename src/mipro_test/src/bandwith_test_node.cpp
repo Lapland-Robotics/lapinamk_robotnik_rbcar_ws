@@ -12,7 +12,7 @@ int main(int argc, char **argv){
   ros::NodeHandle nh;
 
   // Create a publisher for sensor_msgs/Image
-  ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 10);
+  ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 20);
 
   // Set loop rate (publishing frequency)
   ros::Rate loop_rate(10); // 4 Hz => 0,5 x 8 x 10 => 40 Mbps
