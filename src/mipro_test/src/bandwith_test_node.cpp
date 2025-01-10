@@ -12,10 +12,14 @@ int main(int argc, char **argv){
   ros::NodeHandle nh;
 
   // Create a publisher for sensor_msgs/Image
-  ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 20);
+  ros::Publisher image_pub1 = nh.advertise<sensor_msgs::Image>("bandwidth_test1", 20, ros::TransportHints().tcpNoDelay());
+  ros::Publisher image_pub2 = nh.advertise<sensor_msgs::Image>("bandwidth_test2", 20, ros::TransportHints().tcpNoDelay());
+  ros::Publisher image_pub3 = nh.advertise<sensor_msgs::Image>("bandwidth_test3", 20, ros::TransportHints().tcpNoDelay());
+  ros::Publisher image_pub4 = nh.advertise<sensor_msgs::Image>("bandwidth_test4", 20, ros::TransportHints().tcpNoDelay());
+  ros::Publisher image_pub5 = nh.advertise<sensor_msgs::Image>("bandwidth_test5", 20, ros::TransportHints().tcpNoDelay());
 
   // Set loop rate (publishing frequency)
-  ros::Rate loop_rate(20); // 4 Hz => 0,5 x 8 x 10 => 40 Mbps
+  ros::Rate loop_rate(10); // 4 Hz => 0,5 x 8 x 10 => 40 Mbps
 
   // Load the image using OpenCV (replace with your image file path)
   std::string image_path = "src/mipro_test/resources/test_image1.jpg";
@@ -36,7 +40,11 @@ int main(int argc, char **argv){
   // Main loop to publish image
   while (ros::ok()){
     cv_bridge_image.header.stamp = ros::Time::now();
-    image_pub.publish(cv_bridge_image.toImageMsg());
+    image_pub1.publish(cv_bridge_image.toImageMsg());
+    image_pub2.publish(cv_bridge_image.toImageMsg());
+    image_pub3.publish(cv_bridge_image.toImageMsg());
+    image_pub4.publish(cv_bridge_image.toImageMsg());
+    image_pub5.publish(cv_bridge_image.toImageMsg());
     ros::spinOnce();
     loop_rate.sleep();
   }
