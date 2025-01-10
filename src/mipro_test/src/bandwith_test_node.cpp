@@ -15,10 +15,10 @@ int main(int argc, char **argv){
   ros::Publisher image_pub = nh.advertise<sensor_msgs::Image>("bandwidth_test", 20);
 
   // Set loop rate (publishing frequency)
-  ros::Rate loop_rate(10); // 4 Hz => 0,5 x 8 x 10 => 40 Mbps
+  ros::Rate loop_rate(20); // 4 Hz => 0,5 x 8 x 10 => 40 Mbps
 
   // Load the image using OpenCV (replace with your image file path)
-  std::string image_path = "src/mipro_test/resources/test_image.jpg";
+  std::string image_path = "src/mipro_test/resources/test_image1.jpg";
   cv::Mat cv_image = cv::imread(image_path, cv::IMREAD_COLOR);
 
   if (cv_image.empty()){
