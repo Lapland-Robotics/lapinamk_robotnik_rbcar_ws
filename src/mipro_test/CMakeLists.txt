@@ -141,6 +141,8 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(bandwith_test_node src/bandwith_test_node.cpp)
+add_executable(latency_remote_node src/latancy_test_remote_node.cpp)
+add_executable(latency_rbcar_node src/latancy_test_rbcar_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,9 +153,21 @@ add_executable(bandwith_test_node src/bandwith_test_node.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(bandwith_test_node ${bandwith_test_node_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(latency_remote_node ${latency_remote_node_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(latency_rbcar_node ${latency_remote_node_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(bandwith_test_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(latency_remote_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(latency_rbcar_node
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )
