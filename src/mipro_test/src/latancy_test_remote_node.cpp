@@ -11,7 +11,6 @@ void publishTimestamp(const ros::TimerEvent&)
     std_msgs::Header msg;
     msg.stamp = ros::Time::now();
     publisher.publish(msg);
-    ROS_INFO("Published timestamp to /latancy_halfway: %.3f ms", msg.stamp.toSec() * 1000.0);
 }
 
 // Callback for latency calculation
@@ -19,7 +18,7 @@ void latencyCallback(const std_msgs::Header::ConstPtr& msg)
 {
     ros::Time now = ros::Time::now();
     double latency_ms = (now - msg->stamp).toSec() * 1000.0;
-    ROS_INFO("Latency calculated from /latancy_fullway: %.3f ms", latency_ms);
+    ROS_INFO("Latency calculated: %.3f ms", latency_ms);
 }
 
 int main(int argc, char** argv)
