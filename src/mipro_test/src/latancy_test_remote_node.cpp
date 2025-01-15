@@ -18,7 +18,7 @@ void latencyCallback(const std_msgs::Header::ConstPtr& msg)
 {
     ros::Time now = ros::Time::now();
     double latency_ms = (now - msg->stamp).toSec() * 1000.0;
-    ROS_INFO("Latency calculated: %.3f ms", latency_ms);
+    ROS_INFO("Full duplex Latency: %.3f ms", latency_ms);
 }
 
 int main(int argc, char** argv)
